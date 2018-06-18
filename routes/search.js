@@ -1,6 +1,9 @@
 var express = require('express');
 var elasticsearch = require('elasticsearch');
-var client = new elasticsearch.Client(); // default to localhost:9200
+var esHost = process.env.ES_HOST;
+var esPort = process.env.ES_PORT
+var connectionString = "http://"+esHost+":"+esPort;
+var client = new elasticsearch.Client({ host: connectionString }) // default to localhost:9200
 
 var router = express.Router();
 

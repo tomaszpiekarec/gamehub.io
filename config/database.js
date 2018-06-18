@@ -1,5 +1,5 @@
 var config = require('config');
-
+var dbHost = process.env.DB_HOST;
 module.exports = function (app, mongoose) {
 
     var connect = function () {
@@ -9,7 +9,7 @@ module.exports = function (app, mongoose) {
             },
             auto_reconnect:true
         };
-        mongoose.connect(config.get('chesshub.db'), options);
+        mongoose.connect(dbHost, options);
     };
     connect();
 

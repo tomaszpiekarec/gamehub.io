@@ -1,7 +1,8 @@
 var fs = require('fs');
 var mongoose = require('mongoose');
 var config = require('config');
-mongoose.connect(config.get('chesshub.db'));
+var dbHost = process.env.DB_HOST
+mongoose.connect(dbHost);
 //mongoose.connect('mongodb://localhost/test');
 
 fs.readdirSync(__dirname + '/models').forEach(function (file) {
@@ -59,7 +60,9 @@ User.findOne({email: 'foo@bar.org'} ,function (err, user) {
 /* Init elastic search server */
 
 var elasticsearch = require('elasticsearch');
-var connectionString = "http://"+config.get('chesshub.es.host')+":"+config.get('chesshub.es.port');
+var esHost = process.env.ES_HOST;
+var esPort = process.env.ES_PORT
+var connectionString = "http://"+esHost+":"+esPort;
 var client = new elasticsearch.Client({
 host: connectionString,
 log: 'trace'
